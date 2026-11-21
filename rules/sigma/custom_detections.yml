@@ -1,0 +1,67 @@
+title: SOC Custom Detection Suite (Linux + Windows Sysmon Atomic Red Team)
+id: 9f4e2a10-7b31-4c9a-8c2d-010203040506
+status: stable
+description: Unified Sigma YAML rule catalog corresponding to Wazuh local_rules.xml (100101-100203).
+author: Alamnn
+date: 2026/11/21
+rules:
+  - rule_id: "100101"
+    title: "Linux SSH Brute-Force Attack (5+ Failed Logins from Same IP)"
+    severity: HIGH
+    wazuh_level: 10
+    mitre_tactic: "Credential Access"
+    mitre_technique: "T1110.001"
+    mitre_name: "Brute Force: Password Guessing"
+    log_source: "linux/sshd"
+    match_pattern: "Failed password for .* from (?P<src_ip>\\d+\\.\\d+\\.\\d+\\.\\d+)"
+    threshold_count: 5
+
+  - rule_id: "100102"
+    title: "Unauthorized Linux Sudoers or Group Privilege Escalation"
+    severity: HIGH
+    wazuh_level: 12
+    mitre_tactic: "Privilege Escalation / Persistence"
+    mitre_technique: "T1548.003"
+    mitre_name: "Abuse Elevation Control Mechanism: Sudo and Sudo Caching"
+    log_source: "linux/auth"
+    match_pattern: "(usermod -aG sudo|/etc/sudoers\\.d/|to (shadow )?group 'sudo')"
+
+  - rule_id: "100103"
+    title: "Linux Credential Access on /etc/shadow via auditd"
+    severity: HIGH
+    wazuh_level: 12
+    mitre_tactic: "Credential Access"
+    mitre_technique: "T1003.008"
+    mitre_name: "OS Credential Dumping: /etc/passwd and /etc/shadow"
+    log_source: "linux/auditd"
+    match_pattern: "(name=\"/etc/shadow\"|COMMAND=.*/etc/shadow)"
+
+  - rule_id: "100201"
+    title: "Windows Sysmon EventID 1 - Obfuscated / Encoded PowerShell Command"
+    severity: HIGH
+    wazuh_level: 12
+    mitre_tactic: "Execution / Defense Evasion"
+    mitre_technique: "T1059.001"
+    mitre_name: "Command and Scripting Interpreter: PowerShell (-EncodedCommand)"
+    log_source: "windows/sysmon"
+    match_pattern: "(?i)powershell\\.exe.*(-enc|-encodedcommand|frombase64string)"
+
+  - rule_id: "100202"
+    title: "Windows EventID 4720 / Sysmon - Unauthorized Local Admin Account Creation"
+    severity: CRITICAL
+    wazuh_level: 13
+    mitre_tactic: "Persistence / Privilege Escalation"
+    mitre_technique: "T1136.001"
+    mitre_name: "Create Account: Local Account + Local Administrators Elevation"
+    log_source: "windows/security_sysmon"
+    match_pattern: "(?i)(EventID=4720|net(\\.exe)?\\s+user\\s+\\S+\\s+\\S+\\s+/add|net(\\.exe)?\\s+localgroup\\s+administrators\\s+\\S+\\s+/add)"
+
+  - rule_id: "100203"
+    title: "Windows Sysmon EventID 1/10 - LSASS Memory Dump via comsvcs.dll MiniDump"
+    severity: CRITICAL
+    wazuh_level: 15
+    mitre_tactic: "Credential Access"
+    mitre_technique: "T1003.001"
+    mitre_name: "OS Credential Dumping: LSASS Memory"
+    log_source: "windows/sysmon"
+    match_pattern: "(?i)(comsvcs\\.dll.*MiniDump|TargetImage=.*lsass\\.exe.*GrantedAccess=0x1fffff)"

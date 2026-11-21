@@ -1,0 +1,81 @@
+{
+  "total_rules_loaded": 6,
+  "total_alerts_fired": 6,
+  "critical_alerts": 2,
+  "high_alerts": 4,
+  "false_positives": 0,
+  "alerts": [
+    {
+      "rule_id": "100101",
+      "title": "Linux SSH Brute-Force Attack (5+ Failed Logins from Same IP)",
+      "severity": "HIGH",
+      "wazuh_level": 10,
+      "mitre_tactic": "Credential Access",
+      "mitre_technique": "T1110.001",
+      "mitre_name": "Brute Force: Password Guessing",
+      "endpoint": "kali-endpoint-01 (172.16.167.131 - Linux/auditd/sshd)",
+      "matched_events": 5,
+      "sample_evidence": "Nov 21 17:58:43 kali sshd[7899]: Failed password for atomic_target from 127.0.0.1 port 56760 ssh2"
+    },
+    {
+      "rule_id": "100102",
+      "title": "Unauthorized Linux Sudoers or Group Privilege Escalation",
+      "severity": "HIGH",
+      "wazuh_level": 12,
+      "mitre_tactic": "Privilege Escalation / Persistence",
+      "mitre_technique": "T1548.003",
+      "mitre_name": "Abuse Elevation Control Mechanism: Sudo and Sudo Caching",
+      "endpoint": "kali-endpoint-01 (172.16.167.131 - Linux/auditd/sshd)",
+      "matched_events": 2,
+      "sample_evidence": "Nov 21 17:58:43 kali usermod[7914]: add 'svc_backdoor' to shadow group 'sudo'"
+    },
+    {
+      "rule_id": "100103",
+      "title": "Linux Credential Access on /etc/shadow via auditd",
+      "severity": "HIGH",
+      "wazuh_level": 12,
+      "mitre_tactic": "Credential Access",
+      "mitre_technique": "T1003.008",
+      "mitre_name": "OS Credential Dumping: /etc/passwd and /etc/shadow",
+      "endpoint": "kali-endpoint-01 (172.16.167.131 - Linux/auditd/sshd)",
+      "matched_events": 1,
+      "sample_evidence": "Nov 21 17:58:43 kali sudo[7922]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/head -n 2 /etc/shadow"
+    },
+    {
+      "rule_id": "100201",
+      "title": "Windows Sysmon EventID 1 - Obfuscated / Encoded PowerShell Command",
+      "severity": "HIGH",
+      "wazuh_level": 12,
+      "mitre_tactic": "Execution / Defense Evasion",
+      "mitre_technique": "T1059.001",
+      "mitre_name": "Command and Scripting Interpreter: PowerShell (-EncodedCommand)",
+      "endpoint": "WIN-WS-01.corp.local (Windows 11 + Sysmon v15)",
+      "matched_events": 1,
+      "sample_evidence": "powershell.exe -NoP -NonI -W Hidden -EncodedCommand SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8A"
+    },
+    {
+      "rule_id": "100202",
+      "title": "Windows EventID 4720 / Sysmon - Unauthorized Local Admin Account Creation",
+      "severity": "CRITICAL",
+      "wazuh_level": 13,
+      "mitre_tactic": "Persistence / Privilege Escalation",
+      "mitre_technique": "T1136.001",
+      "mitre_name": "Create Account: Local Account + Local Administrators Elevation",
+      "endpoint": "WIN-WS-01.corp.local (Windows 11 + Sysmon v15)",
+      "matched_events": 1,
+      "sample_evidence": "net.exe user backdoor_adm P@ssw0rd123! /add && net.exe localgroup administrators backdoor_adm /add"
+    },
+    {
+      "rule_id": "100203",
+      "title": "Windows Sysmon EventID 1/10 - LSASS Memory Dump via comsvcs.dll MiniDump",
+      "severity": "CRITICAL",
+      "wazuh_level": 15,
+      "mitre_tactic": "Credential Access",
+      "mitre_technique": "T1003.001",
+      "mitre_name": "OS Credential Dumping: LSASS Memory",
+      "endpoint": "WIN-WS-01.corp.local (Windows 11 + Sysmon v15)",
+      "matched_events": 1,
+      "sample_evidence": "rundll32.exe C:\\windows\\System32\\comsvcs.dll, MiniDump 644 C:\\Users\\Public\\lsass.dmp full"
+    }
+  ]
+}

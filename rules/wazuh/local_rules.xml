@@ -1,0 +1,75 @@
+<!-- Custom Wazuh Detection Rules: /var/ossec/etc/rules/local_rules.xml -->
+<!-- Mapped to MITRE ATT&CK v15 Tactics & Techniques -->
+<group name="local,soc_custom_detections,">
+
+  <!-- RULE 100101: Linux SSH Brute Force (MITRE T1110.001 - Password Guessing) -->
+  <rule id="100101" level="10" frequency="5" timeframe="120">
+    <if_matched_sid>5716</if_matched_sid>
+    <same_source_ip />
+    <description>SOC Custom Detection: SSH Brute-Force Attack Detected (5+ failed logins in 120s from $(srcip))</description>
+    <mitre>
+      <id>T1110.001</id>
+    </mitre>
+    <group>authentication_failures,brute_force,pci_dss_11.4,gdpr_IV_35.7.d,</group>
+  </rule>
+
+  <!-- RULE 100102: Linux Sudoers / Root Privilege Escalation (MITRE T1098 / T1548.003) -->
+  <rule id="100102" level="12">
+    <if_sid>5402,5501,5902,80790</if_sid>
+    <match>usermod -aG sudo|to group 'sudo'|to shadow group 'sudo'|/etc/sudoers</match>
+    <description>SOC Custom Detection: Unauthorized Linux Sudoers Modification or Sudo Group Elevation</description>
+    <mitre>
+      <id>T1548.003</id>
+      <id>T1098</id>
+    </mitre>
+    <group>privilege_escalation,account_manipulation,</group>
+  </rule>
+
+  <!-- RULE 100103: Linux Sensitive Credential File Discovery / Access (MITRE T1003.008 - /etc/shadow) -->
+  <rule id="100103" level="12">
+    <if_group>audit</if_group>
+    <match>/etc/shadow</match>
+    <description>SOC Custom Detection: Credential Access Attempt on /etc/shadow via auditd</description>
+    <mitre>
+      <id>T1003.008</id>
+    </mitre>
+    <group>credential_access,audit_command,</group>
+  </rule>
+
+  <!-- RULE 100201: Windows Sysmon EventID 1 - Encoded PowerShell Execution (MITRE T1059.001 / T1027) -->
+  <rule id="100201" level="12">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image">\\powershell\.exe$|\\pwsh\.exe$</field>
+    <field name="win.eventdata.commandLine">(?i)-enc|-encodedcommand|frombase64string|downloadstring|iex\s*\(</field>
+    <description>SOC Custom Detection: Suspicious Obfuscated/Encoded PowerShell Execution on Windows Endpoint</description>
+    <mitre>
+      <id>T1059.001</id>
+      <id>T1027</id>
+    </mitre>
+    <group>sysmon,execution,powershell,</group>
+  </rule>
+
+  <!-- RULE 100202: Windows Security EventID 4720 / 4732 & Sysmon - Unauthorized Admin Account Creation (MITRE T1136.001) -->
+  <rule id="100202" level="13">
+    <if_sid>60109,60154,61603</if_sid>
+    <field name="win.eventdata.commandLine">(?i)net\s+user\s+\S+\s+\S+\s+/add|net\s+localgroup\s+administrators\s+\S+\s+/add</field>
+    <description>SOC Custom Detection: Unauthorized Local Account Creation and Elevation to Administrators Group</description>
+    <mitre>
+      <id>T1136.001</id>
+      <id>T1098</id>
+    </mitre>
+    <group>persistence,account_creation,privilege_escalation,</group>
+  </rule>
+
+  <!-- RULE 100203: Windows Sysmon EventID 10 / 1 - LSASS Credential Dumping via comsvcs.dll or procdump (MITRE T1003.001) -->
+  <rule id="100203" level="15">
+    <if_group>sysmon_event1,sysmon_event10</if_group>
+    <field name="win.eventdata.commandLine">(?i)comsvcs\.dll.*MiniDump|procdump.*lsass|sekurlsa::logonpasswords</field>
+    <description>SOC Custom Detection: CRITICAL Credential Dumping of LSASS Process Memory</description>
+    <mitre>
+      <id>T1003.001</id>
+    </mitre>
+    <group>credential_access,lsass_dump,</group>
+  </rule>
+
+</group>

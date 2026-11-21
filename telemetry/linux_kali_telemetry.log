@@ -1,0 +1,61 @@
+Nov 21 17:56:27 kali sshd[7679]: Accepted publickey for root from 172.16.167.1 port 56994 ssh2: ED25519 SHA256:Pi6aPtfLuuhAo7N55V5zY6SRbBzBpDsCk+fHJ//f4pM
+Nov 21 17:56:27 kali sshd[7679]: pam_unix(sshd:session): session opened for user root(uid=0) by root(uid=0)
+Nov 21 17:56:27 kali sshd[7679]: Received disconnect from 172.16.167.1 port 56994:11: disconnected by user
+Nov 21 17:56:27 kali sshd[7679]: Disconnected from user root 172.16.167.1 port 56994
+Nov 21 17:56:27 kali sshd[7679]: pam_unix(sshd:session): session closed for user root
+Nov 21 17:56:27 kali sshd[7689]: Accepted publickey for root from 172.16.167.1 port 56995 ssh2: ED25519 SHA256:Pi6aPtfLuuhAo7N55V5zY6SRbBzBpDsCk+fHJ//f4pM
+Nov 21 17:56:27 kali sshd[7689]: pam_unix(sshd:session): session opened for user root(uid=0) by root(uid=0)
+Nov 21 17:56:27 kali sshd[7689]: Received disconnect from 172.16.167.1 port 56995:11: disconnected by user
+Nov 21 17:56:27 kali sshd[7689]: Disconnected from user root 172.16.167.1 port 56995
+Nov 21 17:56:27 kali sshd[7689]: pam_unix(sshd:session): session closed for user root
+Nov 21 17:56:27 kali sshd[7699]: Accepted publickey for root from 172.16.167.1 port 56996 ssh2: ED25519 SHA256:Pi6aPtfLuuhAo7N55V5zY6SRbBzBpDsCk+fHJ//f4pM
+Nov 21 17:56:27 kali sshd[7699]: pam_unix(sshd:session): session opened for user root(uid=0) by root(uid=0)
+Nov 21 17:56:27 kali sshd[7699]: Received disconnect from 172.16.167.1 port 56996:11: disconnected by user
+Nov 21 17:56:27 kali sshd[7699]: Disconnected from user root 172.16.167.1 port 56996
+Nov 21 17:56:27 kali sshd[7699]: pam_unix(sshd:session): session closed for user root
+Nov 21 17:58:36 kali sshd[7710]: Accepted publickey for root from 172.16.167.1 port 57051 ssh2: ED25519 SHA256:Pi6aPtfLuuhAo7N55V5zY6SRbBzBpDsCk+fHJ//f4pM
+Nov 21 17:58:36 kali sshd[7710]: pam_unix(sshd:session): session opened for user root(uid=0) by root(uid=0)
+Nov 21 17:58:38 kali sshd[7885]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=127.0.0.1  user=atomic_target
+Nov 21 17:58:39 kali sshd[7891]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=127.0.0.1  user=atomic_target
+Nov 21 17:58:40 kali sshd[7885]: Failed password for atomic_target from 127.0.0.1 port 56732 ssh2
+Nov 21 17:58:40 kali sshd[7895]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=127.0.0.1  user=atomic_target
+Nov 21 17:58:40 kali sshd[7885]: Connection closed by authenticating user atomic_target 127.0.0.1 port 56732 [preauth]
+Nov 21 17:58:41 kali sshd[7891]: Failed password for atomic_target from 127.0.0.1 port 56744 ssh2
+Nov 21 17:58:41 kali sshd[7899]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=127.0.0.1  user=atomic_target
+Nov 21 17:58:41 kali sshd[7891]: Connection closed by authenticating user atomic_target 127.0.0.1 port 56744 [preauth]
+Nov 21 17:58:42 kali sshd[7903]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=127.0.0.1  user=atomic_target
+Nov 21 17:58:42 kali sshd[7895]: Failed password for atomic_target from 127.0.0.1 port 56758 ssh2
+Nov 21 17:58:43 kali sshd[7907]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=127.0.0.1  user=atomic_target
+Nov 21 17:58:43 kali sshd[7903]: Failed password for atomic_target from 127.0.0.1 port 56762 ssh2
+Nov 21 17:58:43 kali sshd[7899]: Failed password for atomic_target from 127.0.0.1 port 56760 ssh2
+Nov 04 17:15:41 kali sudo[7633]:     root : TTY=pts/1 ; PWD=/root/vulnx ; USER=root ; COMMAND=/usr/bin/chmod +x /usr/share/vulnx/update.sh
+Nov 04 17:15:41 kali sudo[7633]: pam_unix(sudo:session): session opened for user root(uid=0) by root(uid=0)
+Nov 04 17:15:41 kali sudo[7633]: pam_unix(sudo:session): session closed for user root
+Nov 04 17:15:41 kali sudo[7636]:     root : TTY=pts/1 ; PWD=/root/vulnx ; USER=root ; COMMAND=/usr/bin/cp vulnx.py /usr/share/vulnx
+Nov 04 17:15:41 kali sudo[7636]: pam_unix(sudo:session): session opened for user root(uid=0) by root(uid=0)
+Nov 04 17:15:41 kali sudo[7636]: pam_unix(sudo:session): session closed for user root
+Nov 04 17:15:41 kali sudo[7639]:     root : TTY=pts/1 ; PWD=/root/vulnx ; USER=root ; COMMAND=/usr/bin/cp bin/vulnxicon.png /usr/share/icons
+Nov 04 17:15:41 kali sudo[7639]: pam_unix(sudo:session): session opened for user root(uid=0) by root(uid=0)
+Nov 04 17:15:41 kali sudo[7639]: pam_unix(sudo:session): session closed for user root
+Nov 04 17:15:41 kali sudo[7642]:     root : TTY=pts/1 ; PWD=/root/vulnx ; USER=root ; COMMAND=/usr/bin/cp bin/vulnx.desktop /usr/share/applications
+Nov 04 17:15:41 kali sudo[7642]: pam_unix(sudo:session): session opened for user root(uid=0) by root(uid=0)
+Nov 04 17:15:41 kali sudo[7642]: pam_unix(sudo:session): session closed for user root
+Nov 04 17:15:41 kali sudo[7645]:     root : TTY=pts/1 ; PWD=/root/vulnx ; USER=root ; COMMAND=/usr/bin/cp vulnx /usr/local/bin/
+Nov 04 17:15:41 kali sudo[7645]: pam_unix(sudo:session): session opened for user root(uid=0) by root(uid=0)
+Nov 04 17:15:41 kali sudo[7645]: pam_unix(sudo:session): session closed for user root
+Nov 04 17:26:37 kali sudo[7726]:     root : TTY=pts/0 ; PWD=/root ; USER=root ; COMMAND=/usr/bin/apt install wapiti
+Nov 04 17:26:37 kali sudo[7726]: pam_unix(sudo:session): session opened for user root(uid=0) by root(uid=0)
+Nov 04 17:26:39 kali sudo[7726]: pam_unix(sudo:session): session closed for user root
+-- Boot 71cb42ae22c0450d8314321599a285b0 --
+Nov 21 17:58:37 kali useradd[7852]: new group: name=atomic_target, GID=1001
+Nov 21 17:58:37 kali useradd[7852]: new user: name=atomic_target, UID=1001, GID=1001, home=/home/atomic_target, shell=/bin/sh, from=none
+Nov 21 17:58:43 kali useradd[7909]: new group: name=svc_backdoor, GID=1002
+Nov 21 17:58:43 kali useradd[7909]: new user: name=svc_backdoor, UID=1002, GID=1002, home=/home/svc_backdoor, shell=/bin/sh, from=none
+Nov 21 17:58:43 kali usermod[7914]: add 'svc_backdoor' to group 'sudo'
+Nov 21 17:58:43 kali usermod[7914]: add 'svc_backdoor' to shadow group 'sudo'
+Nov 21 17:58:43 kali sudo[7919]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/true
+Nov 21 17:58:43 kali sudo[7919]: pam_unix(sudo:session): session opened for user root(uid=0) by root(uid=0)
+Nov 21 17:58:43 kali sudo[7919]: pam_unix(sudo:session): session closed for user root
+Nov 21 17:58:43 kali sudo[7922]:     root : PWD=/root ; USER=root ; COMMAND=/usr/bin/head -n 2 /etc/shadow
+Nov 21 17:58:43 kali sudo[7922]: pam_unix(sudo:session): session opened for user root(uid=0) by root(uid=0)
+Nov 21 17:58:43 kali sudo[7922]: pam_unix(sudo:session): session closed for user root
